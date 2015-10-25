@@ -1,0 +1,12 @@
+@import "_vars/net/dryuf/_vars";
+
+
+div.net-dryuf-gui-control-PopupInfo
+{
+	background:			$background_color;
+	border-top:			2px solid $shadow_light;
+	border-left:			2px solid $shadow_light;
+	border-right:			2px solid $shadow_dark;
+	border-bottom:			2px solid $shadow_dark;
+	margin:				0px;
+}

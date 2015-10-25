@@ -1,0 +1,179 @@
+@import "_vars/net/dryuf/_vars";
+@import "_templates/net/dryuf/_templates/_messages";
+
+
+@keyframes net-dryuf-datagrid-Renderer-init-animation {
+	0% { color: black }
+	50% { color: white }
+}
+
+@-webkit-keyframes net-dryuf-datagrid-Renderer-init-animation {
+	0% { color: black }
+	50% { color: white }
+}
+
+.net-dryuf-datagrid-Renderer
+{
+	.init
+	{
+		border:				1px solid $info_border;
+		padding:			5px;
+		width:				100%;
+		background:			$info_background;
+		color:				$info_border;
+		font-weight:			bold;
+		animation:			msg_type_blinking 3s 16;
+		-webkit-animation:		msg_type_blinking 3s 16;
+	}
+
+	.initError
+	{
+		border:				1px solid $error_border;
+		padding:			5px;
+		width:				100%;
+		background:			$error_background;
+		color:				$error_border;
+		font-weight:			bold;
+		animation:			msg_type_blinking 3s 16;
+		-webkit-animation:		msg_type_blinking 3s 16;
+	}
+
+	.list
+	{
+		border-collapse:		collapse;
+
+		.rows
+		{
+			border-collapse:		collapse;
+			border:				1px solid $grid_border;
+
+			.header
+			{
+				border-collapse:		collapse;
+				border:				1px solid $grid_border;
+				color:				black;
+				background-image:		linear-gradient(top, $grid_shadow_outer, $grid_shadow_middle 40%, $grid_shadow_outer);
+				background-image:		-webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0%, $grid_shadow_outer), color-stop(40%, $grid_shadow_middle), color-stop(100%, $grid_shadow_outer));;
+				background-image:		-moz-linear-gradient(top, $grid_shadow_outer, $grid_shadow_middle 40%, $grid_shadow_outer);
+
+				.action
+				{
+					border-collapse:		collapse;
+					border:				1px solid $grid_border;
+					font-weight:			bold;
+				}
+
+				.field
+				{
+					border-collapse:		collapse;
+					border:				1px solid $grid_border;
+					font-weight:			bold;
+				}
+			}
+
+			.row-even
+			{
+				border-collapse:		collapse;
+				border:				1px solid $grid_border;
+				background-color:		darken($background_color, 2%);
+
+				.action
+				{
+					border-collapse:		collapse;
+					border:				1px solid $grid_border;
+				}
+
+				.field
+				{
+					border-collapse:		collapse;
+					border:				1px solid $grid_border;
+				}
+			}
+
+			.row-even:hover
+			{
+				background-color:		$hover_background;
+			}
+
+			.row-odd
+			{
+				border-collapse:		collapse;
+				border:				1px solid $grid_border;
+				background-color:		lighten($background_color, 2%);
+
+				.action
+				{
+					border-collapse:		collapse;
+					border:				1px solid $grid_border;
+				}
+
+				.field
+				{
+					border-collapse:		collapse;
+					border:				1px solid $grid_border;
+				}
+			}
+
+			.row-odd:hover
+			{
+				background-color:		$hover_background;
+			}
+
+		}
+	}
+
+	.edit
+	{
+		border-collapse:		collapse;
+
+		.form
+		{
+			.globalError
+			{
+				color:				$error_color;
+			}
+
+			.fields
+			{
+				.key
+				{
+					font-weight:			bold;
+				}
+
+				.fieldError
+				{
+					@include msg_type_template($error_background, $error_color);
+				}
+			}
+		}
+	}
+
+	.action
+	{
+		border-collapse:		collapse;
+
+		.form
+		{
+			.globalError
+			{
+				color:				$error_color;
+			}
+
+			.fields
+			{
+				.field
+				{
+					.key
+					{
+						font-weight:			bold;
+					}
+
+					.fieldError
+					{
+						color:				$error_color;
+					}
+				}
+			}
+		}
+	}
+}

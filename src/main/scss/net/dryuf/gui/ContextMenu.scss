@@ -1,0 +1,48 @@
+@import "_vars/net/dryuf/_vars";
+
+
+.net-dryuf-gui-ContextMenu
+{
+	background:			$background_color;
+	border-top:			2px solid $shadow_light;
+	border-left:			2px solid $shadow_light;
+	border-right:			2px solid $shadow_dark;
+	border-bottom:			2px solid $shadow_dark;
+	margin:				0px;
+
+	.list
+	{
+		margin:				0px;
+		padding:			2px;
+		color:				$link_color;
+		background:			$background_color;
+
+		li.title
+		{
+			color:				$background_color;
+			background:			$link_color;
+		}
+
+		li
+		{
+			padding:			0px;
+			border-bottom:			1px solid $separator_color;
+			list-style-type:		none;
+
+			a {
+				display:			block;
+				padding:			5px 5px 5px 5px;
+				text-decoration:		none;
+				color:				$link_color;
+				background:			$background_color;
+			}
+
+			a:hover {
+				padding:			5px 5px 5px 5px;
+				text-decoration:		none;
+				color:				$background_color;
+				background:			$link_color;
+			}
+		}
+	}
+}
