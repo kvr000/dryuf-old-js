@@ -663,9 +663,12 @@ if (typeof net.dryuf == "undefined") {
 					if (eval("typeof "+dclassname.substr(0, n)+" == \"undefined\""))
 						eval(dclassname.substr(0, n)+" = {}");
 				}
-				var ns = eval(dclassname.substr(0, dclassname.lastIndexOf(".")));
-				ns[dclassname.substr(dclassname.lastIndexOf(".")+1)] = dummyConstructor ? dummyConstructor : implementation.constructor;
+				//var pkg = eval(dclassname.substr(0, dclassname.lastIndexOf(".")));
+				//alert(dclassname+" = function() { this.constructor.apply(this, arguments); }\n");
+				eval(dclassname+" = function() { this.constructor.apply(this, arguments); }\n");
+				//pkg[dclassname.substr(dclassname.lastIndexOf(".")+1)] = dummyConstructor ? dummyConstructor : implementation.constructor;
 				cls = eval(dclassname);
+				cls.prototype.constructor = dummyConstructor ? dummyConstructor : implementation.constructor;
 			}
 			else {
 				cls = dummyConstructor ? dummyConstructor : implementation.constructor;
@@ -687,11 +690,12 @@ if (typeof net.dryuf == "undefined") {
 				var m;
 				if (m = fn.match(/^_(st\$(.*)|\$require|\$translation|\$css)$/)) {
 					if (m[2] != null) {
-						cls[m[2]] = implementation[fn];
+						eval(dclassname)[m[2]] = implementation[fn];
 					}
 				}
-				else
-					cls.prototype[fn] = implementation[fn];
+				else {
+					eval(dclassname).prototype[fn] = implementation[fn];
+				}
 			}
 			if ("_$require" in implementation)
 				net.dryuf.foreach(function(v) { net.dryuf.require(v); }, implementation._$require);
