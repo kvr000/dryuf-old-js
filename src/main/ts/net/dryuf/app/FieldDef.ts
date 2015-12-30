@@ -3,7 +3,7 @@
  *
  * ----------------------------------------------------------------------------------
  *
- * Copyright (C) 2002-2015 Zbyněk Vyškovský
+ * Copyright (C) 2000-2015 Zbyněk Vyškovský
  *
  * ----------------------------------------------------------------------------------
  *
@@ -25,28 +25,46 @@
  * along with Dryuf; if not, write to the Free Software Foundation, Inc., 51
  * Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * @author	2002-2015 Zbyněk Vyškovský
+ * @author	2000-2015 Zbyněk Vyškovský
  * @link	mailto:kvr@matfyz.cz
  * @link	http://kvr.matfyz.cz/software/java/dryuf/
  * @link	http://github.com/dryuf/
  * @license	http://www.gnu.org/licenses/lgpl.txt GNU Lesser General Public License v3
  */
 
-(function() { var cls = net.dryuf.registerClass("net.dryuf.smartclient.Core", null,
+export module net.dryuf.app {
+
+
+const FieldDef_AST_None: int			= 0;
+const FieldDef_AST_Compos: int			= 1;
+const FieldDef_AST_Reference: int		= 2;
+const FieldDef_AST_Children: int		= 3;
+
+export interface FieldDef<FT>
 {
-	constructor:			function()
-	{
-	},
+	getName(): String;
+	getPath(): String;
+	getType(): Class<FT>;
+	getAssocType(): int;
+	getEmbedded(): ClassMeta<FT>;
 
-	_st$registerScClass:		function(classname, superclassName, implementation)
-	{
-		var cls = net.dryuf.registerClass(classname, superclassName, implementation);
-		alert(net.dryuf.core.Dump.dumpContent(cls.prototype, 2));
-		cls.prototype.init = function() {
-			alert("fok"+net.dryuf.core.Dump.dumpContent(arguments, 2));
-			this.constructor.apply(this, arguments);
-		};
-		return cls;
-	},
+	getAssocClass(): Class<Object>;
 
-}); })();
+	getMandatory(): boolean;
+	getDoMandatory(): FT;
+
+	getDisplay(): String;
+	getAlign(): int;
+	getRoles(): FieldRoles;
+
+	getReferenceDef(): ReferenceDef;
+
+	getTextual(): Class<Textual<FT>>;
+	needTextual(): Class<Textual<FT>>;
+
+	getValue(o: Object): FT;
+	setValue(o: Object, value: FT): void;
+}
+
+
+}
