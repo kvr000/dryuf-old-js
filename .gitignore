@@ -20,3 +20,5 @@ tags
 
 src/main/js/net/dryuf/_jspkg.files
 src/main/js/net/dryuf/_jspkg.files.tags
+src/main/ts/**/*.js
+src/main/ts/**/*.js.map

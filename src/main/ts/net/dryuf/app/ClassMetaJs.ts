@@ -34,7 +34,7 @@
 
 export module net.dryuf.app {
 
-class ClassMetaJs<ET> implements ClassMeta<ET>
+export class ClassMetaJs<ET> implements ClassMeta<ET>
 {
 	public static openCached(dataClassName: String, viewName: String): ClassMeta
 	{
@@ -345,7 +345,7 @@ class ClassMetaJs<ET> implements ClassMeta<ET>
 		});
 	}
 
-	public loadAsyncSimple(rpcPath: String, composKey, viewFilter, completor): 
+	public loadAsyncSimple(rpcPath: String, composKey, viewFilter, completor): void
 	{
 		net.dryuf.core.Ajax.runAjax(this.getMethodPath(rpcPath, "retrieve", { norole: 1 }), net.dryuf.core.Json.json({ composKey: composKey, viewFilter: viewFilter }), function(datajs) {
 			var response: Map<String, Object> = net.dryuf.core.Eval.evalSafe("("+datajs+")");
@@ -353,7 +353,7 @@ class ClassMetaJs<ET> implements ClassMeta<ET>
 		});
 	}
 
-	public suggestAsync(rpcPath, composKey, suggest, completor): 
+	public suggestAsync(rpcPath, composKey, suggest, completor): void
 	{
 		net.dryuf.assert(completor);
 		net.dryuf.core.Ajax.runAjax(this.getMethodPath(rpcPath, "suggest", { norole: 1 }), net.dryuf.core.Json.json({ composKey: composKey, _filters: { '-suggest': suggest } }), function(datajs) {
@@ -362,13 +362,13 @@ class ClassMetaJs<ET> implements ClassMeta<ET>
 		});
 	}
 
-	public loadSyncSimple(rpcPath, objkey): 
+	public loadSyncSimple(rpcPath, objkey): Object
 	{
 		var response = net.dryuf.core.Eval.evalSafe("("+net.dryuf.core.Ajax.runAjaxSync(this.getMethodPath(this.getEntityKeyUrl(rpcPath, objkey), "retrieve", { norole: 1 }), net.dryuf.core.Json.json({ key: objkey }))+")");
 		return response.entity;
 	}
 
-	public actionSyncSimple(rpcPath, objkey, actionName): 
+	public actionSyncSimple(rpcPath, objkey, actionName): Object
 	{
 		var arg = { composKey: composKey, key: objKey, action: actionName, data: data };
 		var datajs = null;
@@ -382,7 +382,7 @@ class ClassMetaJs<ET> implements ClassMeta<ET>
 		return response;
 	}
 
-	public cacheSyncSimple(rpcPath, objkey): 
+	public cacheSyncSimple(rpcPath, objkey): Object
 	{
 		var appc = net.dryuf.appCache();
 		var obj = appc.findObject(this.fullName, objkey);
@@ -396,7 +396,7 @@ class ClassMetaJs<ET> implements ClassMeta<ET>
 		return obj;
 	}
 
-	public formatFieldName(entity: Object, fieldName): 
+	public formatFieldName(entity: Object, fieldName): String
 	{
 		var value = this.getFieldValue(entity, fieldName);
 		if (value == null) {
@@ -405,21 +405,17 @@ class ClassMetaJs<ET> implements ClassMeta<ET>
 		return value.toString();
 	}
 
-	public _st$translateAssocType(assocTypeName): 
+	public static translateAssocType(assocTypeName): number
 	{
-		if (!(assocTypeName in cls.assocTypesMap))
-			net.dryuf.reportError("assocTypeName "+assocTypeName+" not defined");
-		return cls.assocTypesMap[assocTypeName];
+		if (!(assocTypeName in ClassMetaJs.assocTypesMap))
+			throw new Error("assocTypeName "+assocTypeName+" not defined");
+		return ClassMetaJs.assocTypesMap[assocTypeName];
 	}
 
-	public loadAndParseXml(): 
+	public loadAndParseXml(): void
 	{
 		var me = this;
-		var xmlObject = net.dryuf.metaCache().findObject("net.dryuf.meta.WebMeta.XmlObject", { dataClassName: this.dataClassName, viewName: this.viewName });
-		if (!xmlObject) {
-			xmlObject = net.dryuf.core.Ajax.runAjaxSyncXmlRoot(net.dryuf.serverPath+"_meta/"+this.dataClassName+"/?view="+this.viewName+net.dryuf.srvArgs(), null, "meta");
-			net.dryuf.metaCache().addObject("net.dryuf.meta.WebMeta.XmlObject", { dataClassName: this.dataClassName, viewName: this.viewName }, xmlObject);
-		}
+		var xmlObject = net.dryuf.core.Ajax.runAjaxSyncXmlRoot(net.dryuf.serverPath+"_meta/"+this.dataClassName+"/?view="+this.viewName+net.dryuf.srvArgs(), null, "meta");
 
 		this.rpcBase = xmlObject.getAttribute("rpc");
 		var reqs = net.dryuf.xml.DomUtil.hashElementAttrs(net.dryuf.xml.DomUtil.getMandatoryElement(xmlObject, "req"));
@@ -475,7 +471,7 @@ class ClassMetaJs<ET> implements ClassMeta<ET>
 		this.refFields = net.dryuf.xml.DomUtil.getMandatoryElement(xmlObject, "refFields").getAttribute("fields").split(/,/);
 	}
 
-	public parseReadFields(fieldsXml, fieldsSet): 
+	public parseReadFields(fieldsXml, fieldsSet): void
 	{
 		var me = this;
 
@@ -523,7 +519,7 @@ class ClassMetaJs<ET> implements ClassMeta<ET>
 					fieldsXml)));
 	}
 
-	public _st$openEmbedded(owner, fieldHash): 
+	public _st$openEmbedded(owner, fieldHash): ClassMetaJs<Object>
 	{
 		var me = new net.dryuf.meta.WebMeta(fieldHash.embedded, owner.viewName);
 		me.basePath = (owner.basePath != null ? ownerBasePath+fieldHash.name : fieldHash.name)+".";
@@ -537,44 +533,43 @@ class ClassMetaJs<ET> implements ClassMeta<ET>
 		this.fields = this.parseReadFields(net.dryuf.xml.DomUtil.getImmediateElementsByTag(fieldsXml, "field"), null);
 	}
 
-	_st$assocTypesMap:			{
+	protected static assocTypesMap: Map<String, Number> = {
 		"none":				net.dryuf.meta.WebFieldImpl.AST_None,
 		"compos":			net.dryuf.meta.WebFieldImpl.AST_Compos,
 		"reference":			net.dryuf.meta.WebFieldImpl.AST_Reference,
 		"children":			net.dryuf.meta.WebFieldImpl.AST_Children,
-	}
+	};
 
-	_$require:			[
-		"net.dryuf.core.Ajax",
-		"net.dryuf.xml.DomUtil",
-		"net.dryuf.core.Eval",
-		"net.dryuf.core.Json",
-		"net.dryuf.meta.FieldRolesImpl",
-		"net.dryuf.meta.WebFieldImpl"
-		],
-
-	basePath:				null,
-
-	pkEmbedded:				null,
-
-	pkClassName:				null,
-
-	pkFieldName:				null,
-
-	composPkClassName:			null,
-
-	composPath:				null,
-
-	additionalPkFields:			null,
-
-	additionalPkFieldsHash:			null,
-
+	//_$require:			[
+	//	"net.dryuf.core.Ajax",
+	//	"net.dryuf.xml.DomUtil",
+	//	"net.dryuf.core.Eval",
+	//	"net.dryuf.core.Json",
+	//	"net.dryuf.meta.FieldRolesImpl",
+	//	"net.dryuf.meta.WebFieldImpl"
+	//	],
 
 	protected dataClassName: String;
 
 	protected viewName: String;
 
 	protected fullName: String;
+
+	protected pkEmbedded: boolean;
+
+	protected pkClassName: String;
+
+	protected pkFieldName: String;
+
+	protected composPkClassName: String;
+
+	protected composPath: String;
+
+	protected additionalPkFields: FieldDef[];
+
+	protected additionalPkFieldsHash: Map<String, FieldDef>;
+
+	protected basePath: String;
 
 	protected rpcBase: String;
 

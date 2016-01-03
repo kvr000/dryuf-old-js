@@ -1,17 +1,18 @@
-export module net.dryuf.app {
+export module net.dryuf.app
+{
 
 
 export interface ClassMeta<ET>
 {
-	convertField(callerContext: CallerContext, fdef: FieldDef<Object>, value: String): Object;
+	convertField(callerContext: CallerContext, fdef: FieldDef<Object>, value:String): Object;
 
 	getDataClassName(): String;
 
 	instantiate(): ET;
 
-	canNew(callerContext: CallerContext): boolean;
+	canNew(callerContext:CallerContext): boolean;
 
-	canDel(callerContext: CallerContext): boolean;
+	canDel(callerContext:CallerContext): boolean;
 
 	hasCompos(): boolean;
 
@@ -19,7 +20,7 @@ export interface ClassMeta<ET>
 
 	/**
 	 * @return
-	 * 	list of additional PK fields within
+	 *    list of additional PK fields within
 	 */
 	getAdditionalPkFields(): String[];
 
@@ -36,44 +37,44 @@ export interface ClassMeta<ET>
 	/**
 	 * Gets object key from the existing object.
 	 */
-	getEntityPkValue(entity: ET): Object;
+	getEntityPkValue(entity:ET): Object;
 
 	/**
 	 * Sets object key.
 	 */
-	setEntityPkValue(entity: ET, value: Object): void;
+	setEntityPkValue(entity:ET, value:Object): void;
 
-	setComposKey(entity: ET, composKey: Object): void;
+	setComposKey(entity:ET, composKey:Object): void;
 
-	getComposKey(entity: ET): Object;
+	getComposKey(entity:ET): Object;
 
 	getActions(): ActionDef[];
 
-	getFieldRoles(name: String): FieldRoles;
+	getFieldRoles(name:String): FieldRoles;
 
-	getField(name: String): FieldDef<Object>;
+	getField(name:String): FieldDef<Object>;
 
-	getEntityFieldValue(entity: ET, fieldName: String): Object;
+	getEntityFieldValue(entity:ET, fieldName:String): Object;
 
-	setEntityFieldValue(entity: ET, fieldName: String, value: Object): void;
+	setEntityFieldValue(entity:ET, fieldName:String, value:Object): void;
 
-	getPathField(path: String): FieldDef<Object>;
+	getPathField(path:String): FieldDef<Object>;
 
-	getEntityPathValue(entity: ET, path: String): Object;
+	getEntityPathValue(entity:ET, path:String): Object;
 
-	setEntityPathValue(entity: ET, path: String, value: Object): void;
+	setEntityPathValue(entity:ET, path:String, value:Object): void;
 
-	getAction(name: String): ActionDef;
+	getAction(name:String): ActionDef;
 
-	getRelation(name: String): RelationDef;
+	getRelation(name:String): RelationDef;
 
-	urlDisplayKey(callerContext: CallerContext, entity: ET): String;
+	urlDisplayKey(callerContext:CallerContext, entity:ET): String;
 
-	urlPkEntityKey(callerContext: CallerContext, pk: Object): String;
+	urlPkEntityKey(callerContext:CallerContext, pk:Object): String;
 
-	getGlobalActionList(callerContext: CallerContext): List<ActionDef>;
+	getGlobalActionList(callerContext:CallerContext): List<ActionDef>;
 
-	getObjectActionList(obj: EntityHolder<ET>): List<ActionDef>;
+	getObjectActionList(obj:EntityHolder<ET>): List<ActionDef>;
 
 	getDataClass(): Class<ET>;
 
@@ -109,7 +110,7 @@ export interface ClassMeta<ET>
 
 	getFilterDefsHash(): Map<String, FilterDef>;
 
-	formatAssocType(assocType: int): String;
+	formatAssocType(assocType:int): String;
 }
 
 

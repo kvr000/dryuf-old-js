@@ -1,3 +1,5 @@
+export module net { export module dryuf { export module core {
+
 /*
  * Dryuf framework
  *
@@ -32,45 +34,39 @@
  * @license	http://www.gnu.org/licenses/lgpl.txt GNU Lesser General Public License v3
  */
 
-export module net.dryuf.app {
 
-import net.dryuf.meta.ReferenceDef;
+/**
+ * {@code UiContext} represents the user localization behaviour.
+ */
+export interface UiContext {
+	getDefaultLanguage(): String;
 
-const FieldDef_AST_None: number			= 0;
-const FieldDef_AST_Compos: number		= 1;
-const FieldDef_AST_Reference: number		= 2;
-const FieldDef_AST_Children: number		= 3;
+	getLanguage(): String;
+	setLanguage(language:String): void;
+	checkLanguage(language:String): boolean;
 
-export interface FieldDef<FT>
-{
-	AST_None: number;
-	AST_Compos: number;
-	AST_Reference: number;
-	AST_Children: number;
+	listLanguages(): String[];
 
-	getName(): String;
-	getPath(): String;
-	getType(): Function;
-	getAssocType(): number;
-	getEmbedded(): ClassMeta<FT>;
+	getLocalizeDebug(): number;
+	setLocalizeDebug(level: number): void;
 
-	getAssocClass(): Class<Object>;
+	getTiming(): boolean;
+	setTiming(timing:boolean): void;
 
-	getMandatory(): boolean;
-	getDoMandatory(): FT;
+	getLocalizePath(): String;
 
-	getDisplay(): String;
-	getAlign(): number;
-	getRoles(): FieldRoles;
+	setLocalizeContextPath(path:String): void;
+	getLocalizeContextPath(): String;
 
-	getReferenceDef(): ReferenceDef;
+	localize(class_name:String, text:String): String;
+	localizeArgs(class_name:String, text:String, objects:Object[]): String;
 
-	getTextual(): Class<Textual<FT>>;
-	needTextual(): Class<Textual<FT>>;
+	localizeArgsEscape(escaper: Function, class_name:String, text:String, objects:Object[]): String;
 
-	getValue(o: Object): FT;
-	setValue(o: Object, value: FT): void;
+	readLocalizedFile(filename:String): String;
+
+	getClassLocalization(className:String): Map<String, String>;
 }
 
 
-}
+} } }
