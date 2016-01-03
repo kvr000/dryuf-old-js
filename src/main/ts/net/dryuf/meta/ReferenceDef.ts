@@ -32,44 +32,21 @@
  * @license	http://www.gnu.org/licenses/lgpl.txt GNU Lesser General Public License v3
  */
 
-export module net.dryuf.app {
+export module net.dryuf.meta {
 
-import net.dryuf.meta.ReferenceDef;
 
-const FieldDef_AST_None: number			= 0;
-const FieldDef_AST_Compos: number		= 1;
-const FieldDef_AST_Reference: number		= 2;
-const FieldDef_AST_Children: number		= 3;
 
-export interface FieldDef<FT>
+export interface ReferenceDef
 {
-	AST_None: number;
-	AST_Compos: number;
-	AST_Reference: number;
-	AST_Children: number;
+	basePath(): String;
 
-	getName(): String;
-	getPath(): String;
-	getType(): Function;
-	getAssocType(): number;
-	getEmbedded(): ClassMeta<FT>;
+	loadAction(): String;
 
-	getAssocClass(): Class<Object>;
+	listAllAction(): String;
 
-	getMandatory(): boolean;
-	getDoMandatory(): FT;
+	listNewAction(): String;
 
-	getDisplay(): String;
-	getAlign(): number;
-	getRoles(): FieldRoles;
-
-	getReferenceDef(): ReferenceDef;
-
-	getTextual(): Class<Textual<FT>>;
-	needTextual(): Class<Textual<FT>>;
-
-	getValue(o: Object): FT;
-	setValue(o: Object, value: FT): void;
+	listSetAction(): String;
 }
 
 
