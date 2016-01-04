@@ -1,4 +1,4 @@
-export module net { export module dryuf { export module core {
+module net { export module dryuf { export module core {
 
 /**
  * {@code AppContainer} manages the beans and set up of the application.
@@ -20,11 +20,11 @@ export interface AppContainer {
 
 	getBean(name:String): Object;
 
-	getBeanTyped<T>(name:String, clazz: Class<T>): T;
+	getBeanTyped<T>(name:String, clazz: ObjectConstructor): T;
 
-	createBeaned<T>(clazz: Class<T>, injects: Map<String, Object>): T;
+	createBeaned<T>(clazz: ObjectConstructor, injects: Map<String, Object>): T;
 
-	createBeanedArgs<T>(constructor: Constructor<T>, args:Object[], injects: Map<String, Object>): T;
+	createBeanedArgs<T>(constructor: ObjectConstructor, args:Object[], injects: Map<String, Object>): T;
 
 	getGlobalRoles(): String[];
 
