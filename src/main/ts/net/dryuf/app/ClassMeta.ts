@@ -10,9 +10,9 @@ export interface ClassMeta<ET>
 
 	instantiate(): ET;
 
-	canNew(callerContext:CallerContext): boolean;
+	canNew(callerContext: CallerContext): boolean;
 
-	canDel(callerContext:CallerContext): boolean;
+	canDel(callerContext: CallerContext): boolean;
 
 	hasCompos(): boolean;
 

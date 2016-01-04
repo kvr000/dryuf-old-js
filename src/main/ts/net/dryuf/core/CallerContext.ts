@@ -34,7 +34,6 @@
 
 export module net { export module dryuf { export module core {
 
-
 /**
  * {@code CallerContext} represents context of the calling party.
  *
@@ -102,7 +101,7 @@ export interface CallerContext //extends AutoCloseable
 	 * @return handler
 	 *        handler associated with the identifier
 	 */
-	checkResource(identifier: String): AutoCloseable;
+	checkResource(identifier: String): Object;
 
 	/**
 	 * Saves handler of specified name in this context.
@@ -112,13 +111,13 @@ export interface CallerContext //extends AutoCloseable
 	 * @param handler
 	 *        handler to be associated with identifier
 	 */
-	saveResource(identifier: String, handler: AutoCloseable): 	void;
+	saveResource(identifier: String, handler: Object): 	void;
 
 	createFullContext(): CallerContext;
 
-	createBeaned<T>(clazz: Class<T>, injects: Map<String, Object>): T;
+	createBeaned<T>(clazz: ObjectConstructor, injects: Map<String, Object>): T;
 
-	createBeanedArgs<T>(constructor: Constructor<T>, args: Object[],  injects: Map<String, Object>): T;
+	createBeanedArgs<T>(constructor: ObjectConstructor, args: Object[],  injects: Map<String, Object>): T;
 
 	/**
 	 * Gets bean of the specified name.
@@ -148,7 +147,7 @@ export interface CallerContext //extends AutoCloseable
 	 * @throw RuntimeException
 	 *        in case the bean was not found
 	 */
-	getBeanTyped<T>(name: String, clazz: Class<T>): T;
+	getBeanTyped<T>(name: String, clazz: ObjectConstructor): T;
 
 	/**
 	 * Notifies context about being logged off.

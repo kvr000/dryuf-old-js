@@ -34,7 +34,6 @@
 
 export module net.dryuf.app {
 
-import net.dryuf.meta.ReferenceDef;
 
 const FieldDef_AST_None: number			= 0;
 const FieldDef_AST_Compos: number		= 1;
