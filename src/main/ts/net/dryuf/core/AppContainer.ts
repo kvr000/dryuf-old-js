@@ -1,4 +1,4 @@
-module net { export module dryuf { export module core {
+module net.dryuf.core {
 
 /**
  * {@code AppContainer} manages the beans and set up of the application.
@@ -32,4 +32,4 @@ export interface AppContainer {
 }
 
 
-} } }
+}

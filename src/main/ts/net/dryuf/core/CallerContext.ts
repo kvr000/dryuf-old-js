@@ -32,7 +32,7 @@
  * @license	http://www.gnu.org/licenses/lgpl.txt GNU Lesser General Public License v3
  */
 
-export module net { export module dryuf { export module core {
+module net.dryuf.core {
 
 /**
  * {@code CallerContext} represents context of the calling party.
@@ -163,4 +163,4 @@ export interface CallerContext //extends AutoCloseable
 }
 
 
-} } }
+}
