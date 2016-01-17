@@ -32,7 +32,7 @@
  * @license	http://www.gnu.org/licenses/lgpl.txt GNU Lesser General Public License v3
  */
 
-export module net.dryuf.meta {
+module net.dryuf.meta {
 
 
 

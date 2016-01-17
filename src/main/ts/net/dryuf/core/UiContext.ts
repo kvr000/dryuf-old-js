@@ -1,4 +1,4 @@
-export module net { export module dryuf { export module core {
+module net.dryuf.core {
 
 /*
  * Dryuf framework
@@ -69,4 +69,4 @@ export interface UiContext {
 }
 
 
-} } }
+}
