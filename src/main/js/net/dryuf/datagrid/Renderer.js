@@ -592,7 +592,7 @@
 
 	getListRowCssClass:		function(i, obj)
 	{
-		return "row-"+((i&1) != 0 ? "odd" : "even");
+		return "row"; //-"+((i&1) != 0 ? "odd" : "even");
 	},
 
 	renderListObject:		function(contentTable, fields, obj, i)
