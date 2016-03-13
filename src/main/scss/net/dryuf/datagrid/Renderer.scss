@@ -71,54 +71,25 @@
 				}
 			}
 
-			.row-even
+			.row
 			{
-				border-collapse:		collapse;
-				border:				1px solid $grid_border;
 				background-color:		darken($background_color, 2%);
-
-				.action
-				{
-					border-collapse:		collapse;
-					border:				1px solid $grid_border;
-				}
-
-				.field
-				{
-					border-collapse:		collapse;
-					border:				1px solid $grid_border;
-				}
 			}
 
-			.row-even:hover
+			.row:nth-of-type(even)
 			{
-				background-color:		$hover_background;
+				background-color:		darken($background_color, 2%);
 			}
 
-			.row-odd
+			.row:nth-of-type(odd)
 			{
-				border-collapse:		collapse;
-				border:				1px solid $grid_border;
 				background-color:		lighten($background_color, 2%);
-
-				.action
-				{
-					border-collapse:		collapse;
-					border:				1px solid $grid_border;
-				}
-
-				.field
-				{
-					border-collapse:		collapse;
-					border:				1px solid $grid_border;
-				}
 			}
 
-			.row-odd:hover
+			.row:hover
 			{
 				background-color:		$hover_background;
 			}
-
 		}
 	}
 
