@@ -49,7 +49,7 @@
 
 		<tiles.version>2.1.3</tiles.version>
 
-		<log4j.version>2.2</log4j.version>
+		<log4j.version>2.15.0</log4j.version>
 		<commons.logging.version>1.2</commons.logging.version>
 
 		<junit.version>4.11</junit.version>
