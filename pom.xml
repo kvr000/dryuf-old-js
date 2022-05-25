@@ -24,7 +24,7 @@
 
 		<spring.version>4.1.6.RELEASE</spring.version>
 		<spring.boot.version>1.2.1.RELEASE</spring.boot.version>
-		<spring.security.version>4.0.1.RELEASE</spring.security.version>
+		<spring.security.version>5.5.7</spring.security.version>
 		<openid4java.version>0.9.4.339</openid4java.version>
 
 		<hibernate.version>4.3.8.Final</hibernate.version>
